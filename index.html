@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clinton Munene — Data Analyst & Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Design Tokens ───────────────────────────── */
+    :root {
+      --navy:       #0B1F3A;
+      --navy-mid:   #132D52;
+      --navy-light: #1A3A6B;
+      --gold:       #C8A84B;
+      --gold-light: #E2C97E;
+      --white:      #FFFFFF;
+      --off-white:  #F7F8FA;
+      --muted:      #6B7A99;
+      --border:     #DDE2ED;
+      --text:       #1A1F2E;
+      --font-head:  'Playfair Display', Georgia, serif;
+      --font-body:  'DM Sans', sans-serif;
+      --radius:     10px;
+      --shadow:     0 4px 24px rgba(11,31,58,0.10);
+      --transition: 0.3s ease;
+    }
+
+    /* ── Reset ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Utility ─────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 96px 0; }
+    .section-alt { background: var(--off-white); }
+    .section-dark { background: var(--navy); color: var(--white); }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 40px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-dark .section-title { color: var(--white); }
+    .section-subtitle { color: var(--muted); font-size: 16px; max-width: 520px; }
+    .section-dark .section-subtitle { color: rgba(255,255,255,0.65); }
+    .gold-line {
+      width: 48px; height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    /* ── Fade-in animation ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Navbar ──────────────────────────────────── */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 20px;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.06em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      transition: background var(--transition);
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+
+    /* ── Hero ────────────────────────────────────── */
+    #hero {
+      background: var(--navy);
+      padding: 120px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -80px;
+      width: 480px; height: 480px;
+      border: 1px solid rgba(200,168,75,0.12);
+      border-radius: 50%;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -40px;
+      width: 300px; height: 300px;
+      border: 1px solid rgba(200,168,75,0.07);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .hero-name {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5.5vw, 64px);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-role {
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: rgba(255,255,255,0.70);
+      font-weight: 300;
+      margin-bottom: 24px;
+    }
+    .hero-bio {
+      font-size: 15px;
+      color: rgba(255,255,255,0.60);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 7px;
+      letter-spacing: 0.04em;
+      transition: background var(--transition), transform var(--transition);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.28);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 7px;
+      letter-spacing: 0.04em;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(200,168,75,0.08); }
+    .hero-avatar {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--navy-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 64px;
+      color: var(--gold);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.09);
+    }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 28px;
+      color: var(--gold);
+    }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* ── About ───────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .about-highlights { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--off-white);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .highlight-icon {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .highlight-icon svg { width: 16px; height: 16px; fill: var(--gold); }
+    .highlight-title { font-size: 13px; font-weight: 500; color: var(--navy); }
+    .highlight-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Skills ──────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .skill-category h3 {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .skill-item { margin-bottom: 18px; }
+    .skill-header { display: flex; justify-content: space-between; margin-bottom: 7px; }
+    .skill-name { font-size: 13px; font-weight: 500; color: var(--white); }
+    .skill-pct { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .skill-bar {
+      height: 5px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tool-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .chip {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(200,168,75,0.35);
+      color: rgba(255,255,255,0.75);
+      background: rgba(200,168,75,0.08);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .chip:hover { border-color: var(--gold); background: rgba(200,168,75,0.15); }
+
+    /* ── Projects ───────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+    .project-thumb {
+      height: 160px;
+      background: var(--navy-mid);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-thumb-label {
+      font-family: var(--font-head);
+      font-size: 32px;
+      color: rgba(200,168,75,0.3);
+      user-select: none;
+    }
+    .project-accent {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .project-body { padding: 22px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .project-tag {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 12px;
+      background: #EFF3FA;
+      color: var(--navy-light);
+      letter-spacing: 0.04em;
+    }
+    .project-title {
+      font-family: var(--font-head);
+      font-size: 17px;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+    .project-links { display: flex; gap: 16px; }
+    .project-link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--navy-light);
+      display: flex; align-items: center; gap: 5px;
+      transition: color var(--transition);
+    }
+    .project-link:hover { color: var(--gold); }
+    .project-link svg { width: 13px; height: 13px; }
+
+    /* ── Contact ─────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .contact-info { }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: rgba(200,168,75,0.12);
+      border: 1px solid rgba(200,168,75,0.25);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 16px; height: 16px; fill: var(--gold); }
+    .contact-item-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+    .contact-item-value { font-size: 14px; color: var(--white); margin-top: 2px; }
+    .contact-form { }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--white);
+      transition: border-color var(--transition);
+      outline: none;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .btn-submit {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 13px 32px;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background var(--transition), transform var(--transition);
+      width: 100%;
+    }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      background: #07121F;
+      padding: 36px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo { font-family: var(--font-head); font-size: 16px; color: rgba(255,255,255,0.55); }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-socials { display: flex; gap: 16px; }
+    .footer-socials a {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .footer-socials a:hover { border-color: var(--gold); background: rgba(200,168,75,0.1); }
+    .footer-socials svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.55); }
+    .footer-socials a:hover svg { fill: var(--gold); }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .section { padding: 64px 0; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ─────────────────────────────── -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="assets/img/clinton-logo.png" class="nav-logo">Clinton <span>Munene</span></a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="assets/resume.pdf" download class="nav-cta">Download CV</a>
+        <div class="nav-hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="reveal">
+          <p class="hero-label">Data Analyst &amp; Scientist</p>
+          <h1 class="hero-name">Clinton <span>Munene</span></h1>
+          <p class="hero-role">Turning Raw Data Into Strategic Decisions</p>
+          <p class="hero-bio">
+            Experienced data professional with expertise in analytics, pipeline engineering,
+            and business intelligence. I help organisations unlock insights from complex datasets
+            to drive measurable outcomes.
+          </p>
+          <div class="hero-btns">
+            <a href="#projects" class="btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              View My Work
+            </a>
+            <a href="assets/resume.pdf" download class="btn-outline">Download CV</a>
+
+            <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/clinton-munene/" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://github.com/Clinton-Analyst" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+            </div>
+          </div>
+
+
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">3+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div>
+              <div class="stat-num">20+</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div>
+              <div class="stat-num">5+</div>
+              <div class="stat-label">Tools Mastered</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-avatar reveal">CM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ──────────────────────────────── -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">Data-driven professional with a passion for insight</h2>
+          <div class="gold-line"></div>
+          <div class="about-text">
+            <p>
+              I am a Data Analyst and Scientist based in Nairobi, Kenya, with a strong background
+              in transforming complex datasets into actionable business intelligence. My work spans
+              data pipeline development, machine learning, predictive analysis, dashboard creation, and statistical analysis.
+            </p>
+            <p>
+              I thrive at the intersection of engineering, visualization and analytics — building robust data
+              infrastructure while keeping the business question front and centre.
+            </p>
+          </div>
+        </div>
+        <div class="about-highlights reveal">
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <div>
+              <div class="highlight-title">Data Analytics</div>
+              <div class="highlight-desc">KPI dashboards, trend analysis, reporting</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+            </div>
+            <div>
+              <div class="highlight-title">Data Engineering</div>
+              <div class="highlight-desc">ETL pipelines, SQL databases, automation</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+            </div>
+            <div>
+              <div class="highlight-title">Business Intelligence</div>
+              <div class="highlight-desc">Power BI, Tableau, executive reporting</div>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+            <div>
+              <div class="highlight-title">Programming</div>
+              <div class="highlight-desc">Python, SQL, R, pandas, data automation</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Skills ─────────────────────────────── -->
+  <section id="skills" class="section section-dark">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Technical Skills</p>
+        <h2 class="section-title">Tools and Technologies</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category reveal">
+          <h3>Analytics & BI</h3>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">SQL</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Excel / Google Sheets</span><span class="skill-pct">92%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Tableau</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          </div>
+        </div>
+        <div class="skill-category reveal">
+          <h3>Engineering & Programming</h3>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Python (pandas, numpy)</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Data Pipelines / ETL</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Streamlit </span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">Git / Version Control</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span class="skill-name">R-Programming</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: 48px;">
+        <h3 style="font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Also familiar with</h3>
+        <div class="tool-chips">
+          <!-- <span class="chip">PostgreSQL</span> -->
+          <!-- <span class="chip">BigQuery</span> -->
+          <!-- <span class="chip">dbt</span> -->
+          <span class="chip">Artificial Intelligence</span>
+          <span class="chip">Data Cleaning</span> 
+          <span class="chip">Plotly</span>
+          <span class="chip">Seaborn</span>
+          <span class="chip">Scikit-learn</span>
+          <span class="chip">Front End Development</span>
+          <span class="chip">Machine Learning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ───────────────────────────── -->
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 48px;">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="gold-line"></div>
+        <p class="section-subtitle">A selection of data projects spanning analytics, Machine Learning, Artificial Intelligence and visualisation.</p>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <div class="project-thumb">
+            <span class="project-thumb-label">01</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Streamlit</span>
+              <span class="project-tag">pandas</span>
+            </div>
+            <h3 class="project-title">Construction Site Daily Progress Reporting</h3>
+            <p class="project-desc">
+              Real-time daily progress reporting system with Safety, QA/QC, and DPR modules.
+              Tracks crew counts, incident trends, and rework rates with interactive visualisations.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/daily-progress-report" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-thumb" style="background: #0F2744;">
+            <span class="project-thumb-label">02</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">SQL</span>
+              <span class="project-tag">Power BI</span>
+              <span class="project-tag">ETL</span>
+            </div>
+            <h3 class="project-title">Machine Learning model for website vs app experience on Customers</h3>
+            <p class="project-desc">
+              End-to-end ETL pipeline extracting sales data from multiple sources, transforming
+              it with SQL, and delivering interactive Power BI dashboards for executive reporting.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/Linear-Regression-Project" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-thumb" style="background: #162038;">
+            <span class="project-thumb-label">03</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">pandas</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+            <h3 class="project-title">Housing Price Prediction Model</h3>
+            <p class="project-desc">
+              Machine learning pipeline to predict housing prices using historical data.
+              Includes feature engineering, model evaluation, and an interactive results dashboard.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/Housing-price-prediction" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+                <div class="project-card reveal">
+          <div class="project-thumb" style="background: #162038;">
+            <span class="project-thumb-label">04</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">pandas</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+            <h3 class="project-title">Labour Productivity and cost-efficiency Analyzer</h3>
+            <p class="project-desc">
+              Machine learning pipeline to predict housing prices using historical data.
+              Includes feature engineering, model evaluation, and an interactive results dashboard.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/Construction-labour-productivity-and-cost-efficiency-analyzer" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+                <div class="project-card reveal">
+          <div class="project-thumb" style="background: #162038;">
+            <span class="project-thumb-label">05</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">pandas</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+            <h3 class="project-title">Worker Productivity Dashboard</h3>
+            <p class="project-desc">
+              Machine learning pipeline to predict housing prices using historical data.
+              Includes feature engineering, model evaluation, and an interactive results dashboard.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/worker-productivity-dashboard" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+                <div class="project-card reveal">
+          <div class="project-thumb" style="background: #162038;">
+            <span class="project-thumb-label">06</span>
+            <div class="project-accent"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">pandas</span>
+              <span class="project-tag">Plotly</span>
+            </div>
+            <h3 class="project-title">Data Cleaning API</h3>
+            <p class="project-desc">
+              Machine learning pipeline to predict housing prices using historical data.
+              Includes feature engineering, model evaluation, and an interactive results dashboard.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Clinton-Analyst/data-cleaning-api" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                GitHub
+              </a>
+              <a href="#" class="project-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ─────────────────────────────── -->
+  <section id="contact" class="section section-dark">
+    <div class="container">
+      <div class="reveal" style="margin-bottom: 56px;">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Let's Work Together</h2>
+        <div class="gold-line"></div>
+        <p class="section-subtitle">Open to data analyst, data science, statistics, research analyst and BI developer roles. Let's connect.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">clintonmunene2000@gmail.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Location</div>
+              <div class="contact-item-value">Nairobi, Kenya</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">LinkedIn</div>
+              <div class="contact-item-value">linkedin.com/in/clinton-munene</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">GitHub</div>
+              <div class="contact-item-value">github.com/Clinton-Analyst</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="Clinton Munene"/>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="clintonmunene2000@gmail.com"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" placeholder="Job opportunity / Project collaboration"/>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell me about the role or project..."></textarea>
+            </div>
+            <button class="btn-submit">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">Clinton<span>Munene</span></div>
+        <p class="footer-copy">© clinton 2026 — Built with HTML, CSS & JavaScript</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/clinton-munene/" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://github.com/Clinton-Analyst" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ─────────────────────────────── -->
+  <script>
+    // Sticky navbar shadow
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Skill bar animation
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skill-category').forEach(el => skillObserver.observe(el));
+
+    // Hamburger menu (mobile)
+    document.getElementById('hamburger').addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      if (links) {
+        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '64px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'var(--navy)';
+        links.style.padding = '20px 32px';
+        links.style.borderTop = '1px solid rgba(255,255,255,0.07)';
+      }
+    });
+  </script>
+
+</body>
+</html>
